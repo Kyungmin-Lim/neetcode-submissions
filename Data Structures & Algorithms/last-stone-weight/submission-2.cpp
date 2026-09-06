@@ -1,0 +1,37 @@
+class Solution {
+public:
+    int lastStoneWeight(vector<int>& stones) {
+        // Time complexity: O(NlogN)
+        // Space complexity: O(N)
+        priority_queue<int> maxheap;
+        int result;
+
+        for(auto stone:stones)
+        {
+            maxheap.push(stone);
+        }
+
+        while(maxheap.size()>1)
+        {
+            int first = maxheap.top();
+            maxheap.pop();
+            int second = maxheap.top();
+            maxheap.pop();
+
+            if(first!=second)
+            {
+                maxheap.push(first-second);
+            }
+        }
+        if(maxheap.size()==0)
+        {
+            return 0;
+        }
+        else
+        {
+            result = maxheap.top();
+        }
+        return result;
+        
+    }
+};
